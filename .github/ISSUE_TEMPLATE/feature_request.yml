@@ -1,0 +1,96 @@
+name: Feature request
+description: Propose a feature/enhancement with clear scope and acceptance criteria
+title: "[FEATURE] "
+labels: ["enhancement", "needs-refinement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe business value, scope, dependencies, and measurable acceptance criteria.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      placeholder: What problem are we solving?
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_story
+    attributes:
+      label: User story
+      placeholder: |
+        AS A [role]
+        I WANT TO [action]
+        SO THAT [business value]
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - Given ...
+          When ...
+          Then ...
+        - Given ...
+          When ...
+          Then ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope (in/out)
+      placeholder: |
+        In scope:
+        Out of scope:
+    validations:
+      required: true
+
+  - type: dropdown
+    id: business_priority
+    attributes:
+      label: Business priority
+      options:
+        - Must have
+        - Should have
+        - Nice to have
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      placeholder: API readiness, design assets, external systems, or other stories.
+    validations:
+      required: false
+
+  - type: textarea
+    id: technical_notes
+    attributes:
+      label: Technical constraints / notes
+      placeholder: Navigation impact, store impact, API contract notes, security/performance constraints.
+    validations:
+      required: false
+
+  - type: textarea
+    id: ux_notes
+    attributes:
+      label: UX/UI notes
+      placeholder: Screen flow, loading/empty/error states, i18n behavior.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Readiness checklist
+      options:
+        - label: I provided measurable acceptance criteria.
+        - label: I identified dependencies and constraints.
+        - label: I described expected business/user value.
