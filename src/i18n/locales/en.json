@@ -1,0 +1,40 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "empty": "No data available"
+  },
+  "home": {
+    "title": "Home",
+    "newMovies": "New Movies",
+    "singleMovies": "Movies",
+    "seriesMovies": "Series",
+    "watchNow": "Watch Now"
+  },
+  "detail": {
+    "episodes": "Episodes",
+    "description": "Description",
+    "cast": "Cast",
+    "watchNow": "Watch Now",
+    "addToWatchlist": "Save",
+    "removeFromWatchlist": "Unsave"
+  },
+  "player": {
+    "nextEpisode": "Next Episode"
+  },
+  "search": {
+    "placeholder": "Search movies...",
+    "noResults": "No movies found"
+  },
+  "watchlist": {
+    "title": "Favorites",
+    "empty": "No saved movies yet"
+  },
+  "profile": {
+    "title": "Settings",
+    "darkMode": "Dark Mode",
+    "language": "Language",
+    "version": "Version"
+  }
+}

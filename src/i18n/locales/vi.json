@@ -1,0 +1,40 @@
+{
+  "common": {
+    "loading": "Đang tải...",
+    "error": "Có lỗi xảy ra",
+    "retry": "Thử lại",
+    "empty": "Không có dữ liệu"
+  },
+  "home": {
+    "title": "Trang chủ",
+    "newMovies": "Phim mới cập nhật",
+    "singleMovies": "Phim lẻ",
+    "seriesMovies": "Phim bộ",
+    "watchNow": "Xem ngay"
+  },
+  "detail": {
+    "episodes": "Danh sách tập",
+    "description": "Nội dung",
+    "cast": "Diễn viên",
+    "watchNow": "Xem ngay",
+    "addToWatchlist": "Lưu phim",
+    "removeFromWatchlist": "Bỏ lưu"
+  },
+  "player": {
+    "nextEpisode": "Tập tiếp theo"
+  },
+  "search": {
+    "placeholder": "Tìm kiếm phim...",
+    "noResults": "Không tìm thấy phim nào"
+  },
+  "watchlist": {
+    "title": "Yêu thích",
+    "empty": "Chưa có phim nào được lưu"
+  },
+  "profile": {
+    "title": "Cài đặt",
+    "darkMode": "Chế độ tối",
+    "language": "Ngôn ngữ",
+    "version": "Phiên bản"
+  }
+}

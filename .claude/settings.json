@@ -1,4 +1,11 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(del \"d:\\\\fe\\\\movie_app\\\\src\\\\app\\\\explore.tsx\")",
+      "Bash(Remove-Item \"d:\\\\fe\\\\movie_app\\\\src\\\\app\\\\explore.tsx\" -Force)"
+    ]
+  },
   "enabledPlugins": {
     "expo@claude-plugins-official": true
   }
