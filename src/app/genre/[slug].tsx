@@ -80,11 +80,6 @@ export default function GenrePage() {
         </View>
       )}
       onEndReached={() => {
-        console.log("[Genre] onEndReached", {
-          hasNextPage,
-          isFetchingNextPage,
-          total: movies.length,
-        });
         if (hasNextPage && !isFetchingNextPage) fetchNextPage();
       }}
       onEndReachedThreshold={0.8}
