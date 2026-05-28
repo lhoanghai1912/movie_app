@@ -3,7 +3,22 @@
     "allow": [
       "Bash(npx tsc *)",
       "Bash(del \"d:\\\\fe\\\\movie_app\\\\src\\\\app\\\\explore.tsx\")",
-      "Bash(Remove-Item \"d:\\\\fe\\\\movie_app\\\\src\\\\app\\\\explore.tsx\" -Force)"
+      "Bash(Remove-Item \"d:\\\\fe\\\\movie_app\\\\src\\\\app\\\\explore.tsx\" -Force)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(mkdir -p /tmp/design2)",
+      "Bash(tar -xf 'C:/Users/hoang/AppData/Local/Temp/design2.tar' -C /tmp/design2)",
+      "Read(//tmp/**)",
+      "Read(//c/Users/hoang/AppData/Local/Temp/design2/movie-app-design-system/project/ui_kits/movie_app/**)",
+      "Read(//c/Users/hoang/AppData/Local/Temp/design2/movie-app-design-system/project/**)",
+      "Bash(Remove-Item -Recurse -Force \"d:\\\\fe\\\\movie_app\\\\src\\\\features\")",
+      "Bash(Remove-Item -Recurse -Force \"d:\\\\fe\\\\movie_app\\\\src\\\\shared\")",
+      "Bash(Remove-Item -Recurse -Force \"d:\\\\fe\\\\movie_app\\\\src\\\\hooks\\\\use-color-scheme.ts\")",
+      "Bash(Remove-Item -Recurse -Force \"d:\\\\fe\\\\movie_app\\\\src\\\\hooks\\\\use-color-scheme.web.ts\")",
+      "Bash(Remove-Item -Recurse -Force \"d:\\\\fe\\\\movie_app\\\\src\\\\hooks\\\\use-movie-theme.ts\")",
+      "PowerShell(Get-ChildItem -Recurse \"d:\\\\fe\\\\movie_app\\\\src\" -Name | Where-Object { $_ -notmatch \"node_modules\" } | Sort-Object)",
+      "Bash(node -e \"try{require\\('expo-video'\\);console.log\\('installed'\\)}catch\\(e\\){console.log\\('not installed'\\)}\")",
+      "PowerShell(head -10)",
+      "Bash(node -e \"const p=require\\('./node_modules/reactotron-react-native/package.json'\\); console.log\\('main:', p.main, 'exports:', JSON.stringify\\(p.exports,null,2\\)\\)\")"
     ]
   },
   "enabledPlugins": {

@@ -1,108 +1,192 @@
 ---
-description: "Audit UI consistency: colors, spacing, typography, card patterns. Dùng khi tạo screen mới hoặc review style trước commit."
+description: "Audit UI consistency: colors, spacing, typography, card patterns theo movie app design system. Dùng khi tạo screen mới hoặc review style trước commit."
 allowed-tools: ["Read", "Glob", "Grep", "Edit"]
 ---
 
-Bạn là UI/UX specialist cho HaiAu CRM. Audit và chuẩn hóa style theo design system.
+Bạn là UI specialist cho movie streaming app. Audit và chuẩn hóa style theo design system trong `src/constants/theme.ts`.
 
 **Target:** $ARGUMENTS
-(Nếu không có argument → audit tất cả files `.ts` / `.tsx` đã thay đổi)
+(Không có argument → audit files `.ts` / `.tsx` đã thay đổi gần nhất)
 
 ---
 
-## DESIGN SYSTEM REFERENCE
+## DESIGN SYSTEM REFERENCE (`src/constants/theme.ts`)
 
-### Colors (`src/theme/index.ts`)
+### Colors — luôn qua `useTheme()`, KHÔNG import `MovieThemes` trực tiếp trong component
 
 | Token | Dùng cho |
-|-------|---------|
-| `colors.navy` | Giá trị quan trọng, heading chính |
-| `colors.blue1` | Section headers, labels |
-| `colors.blue` | Links, action buttons, active state |
-| `colors.textSecondary` | Labels phụ, metadata |
-| `colors.border` | Dividers, borders, separator |
-| `colors.background` | Screen background |
-| `colors.white` | Card background |
-| `colors.gray` | Placeholder, inactive text |
-| `colors.red` | Lỗi, cảnh báo, tab active (legacy) |
+|-------|----------|
+| `theme.background` | Screen background |
+| `theme.surface` | Section / row background |
+| `theme.card` | Card background |
+| `theme.overlay` | Modal overlay, gradient |
+| `theme.text` | Primary text |
+| `theme.textSecondary` | Labels, metadata, subtitles |
+| `theme.textMuted` | Placeholder, disabled, timestamps |
+| `theme.accent` | CTA buttons, active tab, highlights |
+| `theme.accentDim` | Pressed state, badge bg |
+| `theme.border` | Dividers, card borders |
+| `theme.star` | Rating stars (#F5C518) |
+| `theme.success / warning / error` | Status indicators |
 
-### Spacing (`constant/scale`)
+### Spacing (4pt scale)
 
-| Dùng | Scale | Đơn vị |
-|------|-------|--------|
-| Font size | `ms(n)` | Horizontal moderate scale |
-| Width, padding horizontal | `ms(n)` | Horizontal moderate scale |
-| Height, padding vertical, margin top/bottom | `vs(n)` | Vertical scale |
-| Card border radius | `ms(12)` | KHÔNG dùng `RADIUS*3` hay `ms(20)` |
-| Screen horizontal padding | `ms(16)` | Standard |
-| Screen bottom padding | `vs(120)` | Đủ chỗ cho tab bar |
+| Constant | Value | Dùng cho |
+|----------|-------|----------|
+| `Spacing.half` | 2 | Micro gaps |
+| `Spacing.one` | 4 | Icon gap, badge padding |
+| `Spacing.two` | 8 | Item gap, inner padding |
+| `Spacing.three` | 16 | Screen horizontal padding, section gap |
+| `Spacing.four` | 24 | Section margin |
+| `Spacing.five` | 32 | Hero padding |
+| `HorizontalPad` | 16 | Screen edge padding (alias Spacing.three) |
+
+### Typography
+
+| Constant | Size | Dùng cho |
+|----------|------|----------|
+| `FontSize.xs` | 10 | Captions, badges |
+| `FontSize.sm` | 12 | Secondary labels, metadata |
+| `FontSize.base` | 14 | Body text, card title |
+| `FontSize.md` | 16 | Subheading, tab label |
+| `FontSize.lg` | 18 | Screen heading |
+| `FontSize.xl` | 20 | Section title |
+| `FontSize['2xl']` | 24 | Hero title |
+
+FontWeight: `regular: '400'` / `medium: '500'` / `semibold: '600'` / `bold: '700'`
+
+### Border Radius
+
+| Constant | Value | Dùng cho |
+|----------|-------|----------|
+| `Radius.xs` | 4 | Badge, tag |
+| `Radius.sm` | 6 | Button small |
+| `Radius.md` | 8 | Input, card inner |
+| `Radius.lg` | 12 | Card, modal |
+| `Radius.xl` | 16 | Bottom sheet |
+| `Radius.full` | 9999 | Avatar, pill |
+
+### Card Dimensions
+
+```typescript
+CardSize.poster  = { width: 120, height: 180 }   // 2:3 portrait
+CardSize.wide    = { width: 200, height: 112 }   // 16:9 wide
+CardSize.episode = { width: 72, height: 72 }     // square
+BottomTabInset = 50 (iOS) / 80 (Android)
+```
 
 ---
 
 ## CHECKLIST AUDIT
 
-### 1. Màu sắc
-- [ ] Không hardcode hex (`'#123456'`, `'red'`, `'white'`) — dùng `colors.*`
-- [ ] Section label: `colors.blue1` (KHÔNG `colors.gray`)
-- [ ] Value text: `colors.navy`
-- [ ] Label phụ: `colors.textSecondary`
-- [ ] Background: `colors.background` (screen), `colors.white` (card)
+### 1. Colors
+- [ ] Không hardcode hex (`'#E63946'`, `'#fff'`) — luôn dùng `theme.*`
+- [ ] `useTheme()` ở đầu component, destructure tokens cần thiết
+- [ ] Accent = `theme.accent`, KHÔNG hardcode red/blue/purple
+- [ ] Text chính: `theme.text`, phụ: `theme.textSecondary`, mờ: `theme.textMuted`
 
-### 2. Typography
-- [ ] Font size dùng `ms()`: label `ms(12-13)`, value `ms(14)`, heading `ms(16-18)`
-- [ ] fontWeight: label `'600'`, section heading `'700'`, value `'600'` hoặc `'500'`
-- [ ] Không hardcode font size số thực
+### 2. Spacing & Layout
+- [ ] Horizontal screen padding = `HorizontalPad` (16) hoặc `Spacing.three`
+- [ ] Không hardcode pixel `paddingHorizontal: 15` hay `marginTop: 20`
+- [ ] Card gap trong list = `Spacing.two` (8)
+- [ ] Section margin = `Spacing.four` (24)
+- [ ] Bottom scroll clearance = `insets.bottom + BottomTabInset`
 
-### 3. Spacing & Layout
-- [ ] `ms()` cho horizontal padding, `vs()` cho vertical padding/margin
-- [ ] Card: `paddingHorizontal: ms(16)`, `borderRadius: ms(12)`
-- [ ] Không dùng `RADIUS * 3` hay `ms(20)` cho border radius card
-- [ ] Screen scroll: `paddingTop: vs(16)`, `paddingHorizontal: ms(16)`, `paddingBottom: vs(120)`
-- [ ] Không thêm `marginHorizontal` trên card khi parent đã có `paddingHorizontal`
+### 3. Typography
+- [ ] Font size dùng `FontSize.*` constant
+- [ ] Không hard-code `fontSize: 13` hay `fontSize: 17`
+- [ ] Title: `FontSize.lg` + `FontWeight.bold`
+- [ ] Body: `FontSize.base` + `FontWeight.regular`
+- [ ] Label: `FontSize.sm` + `FontWeight.medium`
 
-### 4. Section Label Pattern
-```typescript
-sectionLabel: {
-  fontSize: ms(13),
-  fontWeight: '700',
-  color: colors.blue1,        // KHÔNG gray
-  letterSpacing: 0.8,
-  marginTop: vs(4),
-  marginBottom: vs(8),
-  // KHÔNG paddingLeft/paddingHorizontal
-},
-```
+### 4. Cards
+- [ ] Border radius: `Radius.lg` (12) cho movie card
+- [ ] Background: `theme.card`
+- [ ] Border: `1px theme.border` hoặc không border (chọn 1 pattern nhất quán)
+- [ ] Image dùng `expo-image` `<Image>` với `contentFit="cover"`
+- [ ] `recyclingKey` = `movie.slug` khi trong FlashList/FlatList
 
-### 5. FieldRow Pattern
-```typescript
-label: {
-  width: ms(140),
-  fontSize: ms(12),
-  fontWeight: '600',
-  color: colors.textSecondary,
-},
-value: {
-  flex: 1,
-  fontSize: ms(14),
-  fontWeight: '600',
-  color: colors.navy,
-  textAlign: 'right',
-},
-```
+### 5. StyleSheet
+- [ ] `StyleSheet.create({})` cho static styles
+- [ ] Inline style chỉ cho dynamic value (`{ color: theme.text }`)
+- [ ] Không mix: dynamic color trong StyleSheet.create
 
-### 6. StyleSheet
-- [ ] `StyleSheet.create` cho tất cả styles — không inline
-- [ ] Inline style chỉ chấp nhận khi giá trị là dynamic (từ state/props)
+### 6. Themed Primitives
+- [ ] Dùng `<ThemedText>` / `<ThemedView>` cho color-aware elements
+- [ ] KHÔNG đọc `Colors` trực tiếp trong screen — dùng `useTheme()`
+- [ ] New screens: NativeWind `className` + design tokens
 
 ---
 
-## OUTPUT
+## PATTERNS CHUẨN
+
+### Screen layout
+```typescript
+export default function SomeScreen() {
+  const theme = useTheme();
+  const insets = useSafeAreaInsets();
+
+  return (
+    <ThemedView style={{ flex: 1, backgroundColor: theme.background }}>
+      <FlashList
+        data={items}
+        contentContainerStyle={{
+          paddingHorizontal: HorizontalPad,
+          paddingTop: Spacing.three,
+          paddingBottom: insets.bottom + BottomTabInset,
+        }}
+        ...
+      />
+    </ThemedView>
+  );
+}
+```
+
+### Movie card
+```typescript
+const styles = StyleSheet.create({
+  card: {
+    width: CardSize.poster.width,
+    borderRadius: Radius.lg,
+    overflow: 'hidden',
+  },
+  poster: {
+    width: CardSize.poster.width,
+    height: CardSize.poster.height,
+  },
+  title: {
+    fontSize: FontSize.sm,
+    fontWeight: FontWeight.medium,
+    marginTop: Spacing.one,
+    paddingHorizontal: Spacing.one,
+  },
+});
+```
+
+### Section header
+```typescript
+const styles = StyleSheet.create({
+  sectionHeader: {
+    fontSize: FontSize.md,
+    fontWeight: FontWeight.bold,
+    marginBottom: Spacing.two,
+  },
+});
+```
+
+---
+
+## OUTPUT FORMAT
 
 Với mỗi vi phạm:
 ```
-⚠️  File: src/container/Xxx/styles.ts:15
-   Vấn đề: Hardcode color '#1E3A5F' thay vì colors.navy
-   Fix: color: colors.navy
+⚠️  src/app/index.tsx:42
+   Vấn đề: Hardcode color '#E63946' thay vì theme.accent
+   Fix: color: theme.accent
+
+⚠️  src/components/movie-card.tsx:18
+   Vấn đề: fontSize: 13 hardcode
+   Fix: fontSize: FontSize.sm
 ```
 
-Kết thúc: tóm tắt số vi phạm theo loại (colors / spacing / typography / StyleSheet).
+Kết thúc: tóm tắt số vi phạm theo loại (colors / spacing / typography / structure).

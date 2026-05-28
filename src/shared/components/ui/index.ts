@@ -1,5 +1,0 @@
-export { Button } from './Button'
-export { Input } from './Input'
-export { Loading } from './Loading'
-export { Empty } from './Empty'
-export { Skeleton } from './Skeleton'
